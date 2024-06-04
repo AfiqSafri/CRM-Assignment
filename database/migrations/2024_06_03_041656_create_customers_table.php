@@ -11,23 +11,40 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('customers', function (Blueprint $table) {
-            $table->id();
-            $table->string('name');
-            $table->string('email')->unique();
-            $table->string('phone_number');
-            $table->string('address');
-            $table->string('avatar')->nullable();
-            $table->string('id_number')->unique()->default('');
-            $table->timestamps();
-        });
+//         Schema::create('customers', function (Blueprint $table) {
+//             $table->id();
+//             $table->string('name');
+//             $table->string('email')->unique();
+//             $table->string('phone_number');
+//             $table->string('address');
+//             $table->string('avatar')->nullable();
+//             $table->string('id_number')->unique()->default('');
+//             $table->timestamps();
+//         });
+//     }
+
+//     /**
+//      * Reverse the migrations.
+//      */
+//     public function down(): void
+//     {
+//         Schema::dropIfExists('customers');
+//     }
+// };
+    Schema::create('customers', function (Blueprint $table) {
+        $table->id();
+        $table->string('name');
+        $table->string('email')->unique();
+        $table->string('phone_number');
+        $table->string('address');
+        $table->string('avatar');
+        $table->string('id_number')->unique()->nullable();
+        $table->timestamps();
+    });
     }
 
-    /**
-     * Reverse the migrations.
-     */
     public function down(): void
     {
-        Schema::dropIfExists('customers');
+    Schema::dropIfExists('customers');
     }
-};
+    };

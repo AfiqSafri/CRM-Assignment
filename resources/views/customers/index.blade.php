@@ -1,45 +1,3 @@
-{{-- @extends('layouts.app')
-
-@section('content')
-<h1>Customers</h1>
-<a href="{{ route('customers.create') }}" class="btn btn-primary">Add New Customer</a>
-<form method="GET" action="{{ route('customers.index') }}" class="mt-3">
-    <input type="text" name="search" placeholder="Search..." class="form-control" value="{{ request('search') }}">
-</form>
-<table class="table mt-3">
-    <thead>
-        <tr>
-            <th>Name</th>
-            <th>Email</th>
-            <th>Phone Number</th>
-            <th>Address</th>
-            <th>Actions</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach ($customers as $customer)
-            <tr>
-                <td>{{ $customer->name }}</td>
-                <td>{{ $customer->email }}</td>
-                <td>{{ $customer->phone_number }}</td>
-                <td>{{ $customer->address }}</td>
-                <td>
-                    <a href="{{ route('customers.show', $customer) }}" class="btn btn-info">View</a>
-                    <a href="{{ route('customers.edit', $customer) }}" class="btn btn-warning">Edit</a>
-                    <form action="{{ route('customers.destroy', $customer) }}" method="POST" style="display:inline-block;">
-                        @csrf
-                        @method('DELETE')
-                        <button type="submit" class="btn btn-danger">Delete</button>
-                    </form>
-                </td>
-            </tr>
-        @endforeach
-    </tbody>
-</table>
-{{ $customers->links() }}
-@endsection --}}
-
-
 @extends('layouts.app')
 
 @section('content')
@@ -71,6 +29,7 @@
 <table class="table mt-3">
     <thead>
         <tr>
+            <th>ID Number</th>
             <th>Name</th>
             <th>Email</th>
             <th>Phone Number</th>
@@ -81,6 +40,7 @@
     <tbody>
         @foreach ($customers as $customer)
             <tr>
+                <td>{{ $customer->id_number }}</td>
                 <td>{{ $customer->name }}</td>
                 <td>{{ $customer->email }}</td>
                 <td>{{ $customer->phone_number }}</td>
