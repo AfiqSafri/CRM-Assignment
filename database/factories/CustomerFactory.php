@@ -4,11 +4,18 @@ namespace Database\Factories;
 
 use App\Models\Customer;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Support\Str;
 
 class CustomerFactory extends Factory
 {
+    /**
+     * The name of the factory's corresponding model.
+     */
     protected $model = Customer::class;
 
+    /**
+     * Define the model's default state.
+     */
     public function definition()
     {
         return [
@@ -16,7 +23,7 @@ class CustomerFactory extends Factory
             'email' => $this->faker->unique()->safeEmail,
             'phone_number' => $this->faker->phoneNumber,
             'address' => $this->faker->address,
-            'id_number' => $this->faker->unique()->numerify('ID###'),  // Assuming id_number is a string
+            'avatar' => 'avatars/1718040242.jpeg',
         ];
     }
 }

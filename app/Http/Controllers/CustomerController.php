@@ -1,15 +1,13 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use App\Models\Customer;
 use Illuminate\Http\Request;
 use App\Exports\CustomersExport;
 use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Support\Facades\Log;
-// use Barryvdh\DomPDF\Facade as PDF;
-use PDF; 
-
-
+use PDF;
 
 class CustomerController extends Controller
 {
@@ -32,73 +30,28 @@ class CustomerController extends Controller
         return view('customers.create');
     }
 
-    // public function store(Request $request)
-    // {
-    //     $request->validate([
-    //         'name' => 'required|string|max:255',
-    //         'email' => 'required|string|email|max:255|unique:customers',
-    //         'phone_number' => 'required|string|max:15',
-    //         'address' => 'required|string|max:255',
-    //         'avatar' => 'nullable|image',
-    //     ]);
-
-    //     $customer = new Customer($request->all());
-        
-    //     if ($request->hasFile('avatar')) {
-    //         $customer->avatar = $request->file('avatar')->store('avatars');
-    //     }
-
-    //     $customer->save();
-        
-    //     return redirect()->route('customers.index');
-    // }
-
-    // public function store(Request $request)
-    // {
-    //     $request->validate([
-    //         'name' => 'required|string|max:255',
-    //         'email' => 'required|string|email|max:255|unique:customers',
-    //         'phone_number' => 'required|string|max:15',
-    //         'address' => 'required|string|max:255',
-    //         'avatar' => 'nullable|image',
-    //     ]);
-
-    //     $customer = new Customer($request->all());
-
-    //     if ($request->hasFile('avatar')) {
-    //         $file = $request->file('avatar');
-    //         $filename = time() . '.' . $file->getClientOriginalExtension();
-    //         $file->move(public_path('avatars'), $filename);
-    //         $customer->avatar = 'avatars/' . $filename;
-    //     }
-
-    //     $customer->save();
-
-    //     return redirect()->route('customers.index');
-    // }
-
     public function store(Request $request)
     {
-        Log::info($request->all());
         $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:customers',
             'phone_number' => 'required|string|max:15',
             'address' => 'required|string|max:255',
             'avatar' => 'nullable|image',
+            'status' => 'required|in:new,contacted,dropped off,converted',
         ]);
-    
+
         $customer = new Customer($request->all());
-    
+
         if ($request->hasFile('avatar')) {
             $file = $request->file('avatar');
             $filename = time() . '.' . $file->getClientOriginalExtension();
             $file->move(public_path('avatars'), $filename);
             $customer->avatar = 'avatars/' . $filename;
         }
-    
+
         $customer->save();
-    
+
         return redirect()->route('customers.index');
     }
 
@@ -112,26 +65,6 @@ class CustomerController extends Controller
         return view('customers.edit', compact('customer'));
     }
 
-    // public function update(Request $request, Customer $customer)
-    // {
-    //     $request->validate([
-    //         'name' => 'required|string|max:255',
-    //         'email' => 'required|string|email|max:255|unique:customers,email,'.$customer->id,
-    //         'phone_number' => 'required|string|max:15',
-    //         'address' => 'required|string|max:255',
-    //         'avatar' => 'nullable|image',
-    //     ]);
-
-    //     $customer->fill($request->all());
-        
-    //     if ($request->hasFile('avatar')) {
-    //         $customer->avatar = $request->file('avatar')->store('avatars');
-    //     }
-
-    //     $customer->save();
-        
-    //     return redirect()->route('customers.index');
-    // }
     public function update(Request $request, Customer $customer)
     {
         $request->validate([
@@ -140,6 +73,7 @@ class CustomerController extends Controller
             'phone_number' => 'required|string|max:15',
             'address' => 'required|string|max:255',
             'avatar' => 'nullable|image',
+            'status' => 'required|in:new,contacted,dropped off,converted',
         ]);
 
         $customer->fill($request->all());

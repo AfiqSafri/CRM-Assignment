@@ -34,6 +34,7 @@
             <th>Email</th>
             <th>Phone Number</th>
             <th>Address</th>
+            <th>Status</th> <!-- New column for Status -->
             <th>Actions</th>
         </tr>
     </thead>
@@ -45,6 +46,7 @@
                 <td>{{ $customer->email }}</td>
                 <td>{{ $customer->phone_number }}</td>
                 <td>{{ $customer->address }}</td>
+                <td>{{ $customer->status }}</td> <!-- Display status -->
                 <td>
                     <a href="{{ route('customers.show', $customer) }}" class="btn btn-info">View</a>
                     <a href="{{ route('customers.edit', $customer) }}" class="btn btn-warning">Edit</a>
@@ -58,5 +60,9 @@
         @endforeach
     </tbody>
 </table>
-{{ $customers->links() }}
+
+<div class="d-flex justify-content-center mt-4">
+    {{ $customers->appends(request()->query())->links() }}
+</div>
+
 @endsection

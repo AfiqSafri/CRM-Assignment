@@ -37,6 +37,7 @@ class CustomersExport implements FromCollection, WithHeadings, WithMapping
             'Phone Number',
             'Address',
             'ID Number',
+            'Status',
             'Created At',
             'Updated At'
         ];
@@ -50,6 +51,7 @@ class CustomersExport implements FromCollection, WithHeadings, WithMapping
             $customer->phone_number,
             $customer->address,
             $customer->id_number,
+            $customer->status,
             $customer->created_at,
             $customer->updated_at,
         ];
